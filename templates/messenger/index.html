@@ -1,10 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Iris</title>
+    <link rel="stylesheet" href="{% static 'messenger/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="{% static 'messenger/js/clmtrackr.js' %}"></script>
+    <script src="{% static 'messenger/js/main.js' %}" type="module"></script>
+    <script src="{% static 'messenger/js/trainingBoard.js' %}" type="module"></script>
 </head>
 <body>
-<button>Начать обучение</button>
+<video id="webcam" width="400" height="300" autoplay></video>
+<canvas id="overlay" width="400" height="300"></canvas>
+<canvas id="eyes" width="50" height="25"></canvas>
+<canvas id="training-board"></canvas>
 </body>
 </html>
