@@ -5,25 +5,48 @@ $(document).ready(function() {
   ctrack.init();
   const overlay = $('#overlay')[0];
   const overlayCC = overlay.getContext('2d');
+  const mirrorSelector = $('#mirror');
+  const mirror = mirrorSelector[0];
+  const mirrorCC = mirror.getContext('2d');
 
-  function trackingLoop() {
+  let positionHistory = undefined;
+  let faceRectHistory = [];
+  let trainFaceRect = undefined;
+  let train = true;
+
+  function trackingLoop(stream) {
     // Проверим, обнаружено ли в видеопотоке лицо,
     // и если это так - начнём его отслеживать.
     requestAnimationFrame(trackingLoop);
 
     let currentPosition = ctrack.getCurrentPosition();
     overlayCC.clearRect(0, 0, 400, 300);
+    mirrorCC.clearRect(0, 0, 400, 300);
+    mirrorCC.drawImage(
+        video,
+        0, 0, 400, 300
+      );
 
     if (currentPosition) {
+      positionHistory = currentPosition;
       // Выведем линии, проведённые между контрольными точками
       // на элементе <canvas>, наложенном на элемент <video>
       ctrack.draw(overlay);
+
+
 
       // Получим прямоугольник, ограничивающий глаза, и обведём его
       // красными линиями
       const eyesRect = getEyesRectangle(currentPosition);
       overlayCC.strokeStyle = 'red';
       overlayCC.strokeRect(eyesRect[0], eyesRect[1], eyesRect[2], eyesRect[3]);
+      const faceRect = getFaceRectangle(currentPosition);
+      mirrorCC.strokeStyle = 'red';
+      mirrorCC.strokeRect(faceRect[0], faceRect[1], faceRect[2], faceRect[3]);
+      if (!train){
+        mirrorCC.strokeStyle = 'green';
+        mirrorCC.strokeRect(trainFaceRect[0], trainFaceRect[1], trainFaceRect[2], trainFaceRect[3]);
+      }
 
       // Видеопоток может иметь особые внутренние параметры,
       // поэтому нам нужны эти константы для перемасштабирования
@@ -48,7 +71,7 @@ $(document).ready(function() {
   function onStreaming(stream) {
     video.srcObject = stream;
     ctrack.start(video);
-    trackingLoop()
+    trackingLoop();
   }
 
   function getEyesRectangle(positions) {
@@ -60,6 +83,15 @@ $(document).ready(function() {
     const width = maxX - minX;
     const height = maxY - minY;
 
+    return [minX, minY, width, height];
+  }
+  function getFaceRectangle(positions) {
+    const minX = positions[1][0] - 5;
+    const maxX = positions[13][0] + 5;
+    const minY = positions[7][1] - 5;
+    const maxY = positions[20][1] + 5;
+    const width = maxX - minX;
+    const height = maxY - minY;
     return [minX, minY, width, height];
   }
 
@@ -122,10 +154,17 @@ $(document).ready(function() {
     return pointCoord;
   }
 
+  function captureRectCoord(){
+    let faceRec = getFaceRectangle(positionHistory);
+    faceRectHistory.push(faceRec);
+  }
+
+
   canvas.on('saveData', function (e){
     const coordinates = e.detail;
     const coordNormal = pointCoordNormal(coordinates.x, coordinates.y)
     captureExample(coordNormal);
+    captureRectCoord();
   });
   let currentModel;
 
@@ -191,9 +230,38 @@ $(document).ready(function() {
     });
   }
 
+  function createFaceRectCoord(){
+    let minXSum = 0;
+    let minYSum = 0;
+    let widthSum = 0;
+    let heightSum = 0;
+    let n = faceRectHistory.length;
+    for (let i=0; i < faceRectHistory.length; i++){
+      minXSum+=faceRectHistory[i][0];
+      minYSum+=faceRectHistory[i][1];
+      widthSum+=faceRectHistory[i][2];
+      heightSum+=faceRectHistory[i][3];
+    }
+    trainFaceRect = [minXSum/n,minYSum/n, widthSum/n, heightSum/n]
+  }
+
   canvas.on('train', function (){
+    createFaceRectCoord();
     fitModel();
+    train = false
     setInterval(CursorPred, 100);
+  });
+
+  $('body').on('keyup', function (e) {
+        if (e.keyCode === 32) {
+            console.log(mirrorSelector.css('display'));
+            if (mirrorSelector.css('display') === 'block'){
+              mirrorSelector.css('display', 'none');
+            } else {
+              mirrorSelector.css('display', 'block');
+            }
+        }
+
   });
   function CursorPred(){
     const image = getImage();
