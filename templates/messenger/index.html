@@ -4,8 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Iris</title>
+    <link rel="stylesheet" href="{% static 'messenger/css/main.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'messenger/js/eyeTracking.js' %}" type="module"></script>
+    <script src="{% static 'messenger/js/board.js' %}" type="module"></script>
 </head>
 <body>
-
+    <div class="container">
+        <video class="input_video"></video>
+        <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+    </div>
+    <canvas id="board"></canvas>
 </body>
 </html>

@@ -1,0 +1,13 @@
+.input_video{
+    display: none;
+}
+.output_canvas{
+    display: none;
+}
+#board{
+    position: fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
