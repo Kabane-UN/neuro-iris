@@ -18,7 +18,6 @@ $(document).ready(function () {
             results.image, 0, 0, canvasElement.width, canvasElement.height);
         if (results.multiFaceLandmarks) {
             for (const landmarks of results.multiFaceLandmarks) {
-                console.log(vector_len(landmarks[468].x, landmarks[468].y, landmarks[23].x, landmarks[23].y))
                 let nowTime = new Date();
                 if(vector_len(landmarks[468].x, landmarks[468].y, landmarks[33].x, landmarks[33].y) <= 0.014){
                     if (rightTimer === undefined || nowTime.getTime() - rightTimer.getTime() > 1000) {
