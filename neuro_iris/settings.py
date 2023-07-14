@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'neuro_iris.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'iris_neurosa',
         'USER': 'iris_neurosa',
         'PASSWORD': 'RzVoo4rYtkj7TZUA',
