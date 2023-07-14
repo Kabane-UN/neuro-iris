@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'neuro_iris.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg',
+        'NAME': 'iris_neurosa',
+        'USER': 'iris_neurosa',
+        'PASSWORD': 'RzVoo4rYtkj7TZUA',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
