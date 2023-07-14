@@ -5,8 +5,8 @@ $(document).ready(function() {
     canvas.width = canvas.getBoundingClientRect().width;
     canvas.height = canvas.getBoundingClientRect().height;
     function Button(x, y, width, name, leftNeighbour, rightNeighbour, topNeighbor, bottomNeighbor){
-        this.x = x - width / 2;
-        this.y = y - width / 2;
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.path = undefined;
         this.selected = false;
@@ -19,7 +19,7 @@ $(document).ready(function() {
     }
     Button.prototype.draw = function (){
         this.path = new Path2D();
-        this.path.rect(this.x,this.y,this.name === 'Space' ? this.width*6 : this.width,this.width);
+        this.path.rect(this.x- this.width / 2,this.y- this.width / 2,this.name === 'Space' ? this.width*6 : this.width,this.width);
         this.path.closePath();
 
         if (this.selected){
@@ -29,13 +29,33 @@ $(document).ready(function() {
         }
         context.fill(this.path);
         context.lineWidth = 3;
-        context.strokeStyle = "#939090";
+        if (this.selected) {
+            context.strokeStyle = "#33ffee";
+        } else {
+            context.strokeStyle = "#939090";
+        }
         context.font = "bold 44px verdana, sans-serif";
         context.textAlign = "center"
         context.textBaseline = "center";
-        context.fillStyle = "#000000"
-        context.fillText(this.name, this.x+this.width/2*(this.name === 'Space' ? 6 : 1), this.y+this.width/2)
+        if (this.selected){
+            context.fillStyle = "#33ffee";
+        } else {
+            context.fillStyle = "#000000";
+        }
+        context.fillText(this.name, this.x*(this.name === 'Space' ? 1.38 : 1), this.y+this.width*0.1)
         context.stroke(this.path);
+
+        if (this.selected && this.timer !== undefined) {
+            let currentTime = new Date();
+            let path = new Path2D();
+            let lineWidth = this.width * 0.75*(currentTime.getTime()-this.timer.getTime())/3000;
+            path.rect((this.x - this.width / 2)+this.width*0.1, (this.y - this.width / 2)+this.width*0.05,
+                this.name === 'Space' ? lineWidth * 7.5 : lineWidth, this.width * 0.1);
+            path.closePath();
+            context.fillStyle = "#337aff";
+            context.fill(path);
+        }
+
     }
     let capital = false;
     Button.prototype.forSelected = function (){
@@ -69,45 +89,6 @@ $(document).ready(function() {
         }
     }
     function Keyboard(){
-        this.codes = {
-            'й': 0,
-            'ц': 1,
-            'у': 2,
-            'к': 3,
-            'е': 4,
-            'н': 5,
-            'г': 6,
-            'ш': 7,
-            'щ': 8,
-            'з': 9,
-            'х': 10,
-            'ъ': 11,
-
-            'ф': 12,
-            'ы': 13,
-            'в': 14,
-            'а': 15,
-            'п': 16,
-            'р': 17,
-            'о': 18,
-            'л': 19,
-            'д': 20,
-            'ж': 21,
-            'э': 22,
-            'Enter': 23,
-
-            'я': 24,
-            'ч': 25,
-            'с': 26,
-            'м': 27,
-            'и': 28,
-            'т': 29,
-            'ь': 30,
-            'б': 31,
-            'ю': 32,
-            'Shift': 33,
-            'Space': 34,
-        }
         this.buttons = [
             new Button(
                 canvas.width*0.075, canvas.height*0.15, 120,'й',
