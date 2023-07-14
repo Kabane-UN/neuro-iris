@@ -212,7 +212,7 @@ $(document).ready(function() {
                 canvas.width*0.075*9, canvas.height*0.217*3, 120,'ю',
                 31, 33, 20, 36),
             new Button(
-                canvas.width*0.075*10, canvas.height*0.217*3, 120,'ж',
+                canvas.width*0.075*10, canvas.height*0.217*3, 120,',',
                 32, 34, 21, 36),
             new Button(
                 canvas.width*0.075*11, canvas.height*0.217*3, 120,'.',

@@ -20,9 +20,14 @@ $(document).ready(function () {
             for (const landmarks of results.multiFaceLandmarks) {
                 let nowTime = new Date();
                 if(vector_len(landmarks[468].x, landmarks[468].y, landmarks[33].x, landmarks[33].y) <= 0.014){
-                    if (rightTimer === undefined || nowTime.getTime() - rightTimer.getTime() > 1000) {
-
+                    leftTimer = undefined;
+                    bottomTimer = undefined;
+                    topTimer = undefined;
+                    if(rightTimer === undefined){
                         rightTimer = new Date();
+                    } else if (nowTime.getTime() - rightTimer.getTime() > 1000) {
+
+                        rightTimer = undefined;
 
 
                         let coordinatesEvent = new CustomEvent('eyeGesture', {
@@ -34,9 +39,14 @@ $(document).ready(function () {
                     }
                 }
                 if(vector_len(landmarks[468].x, landmarks[468].y, landmarks[133].x, landmarks[133].y) <= 0.019){
-                    if (leftTimer === undefined || nowTime.getTime() - leftTimer.getTime() > 1000) {
-
+                    rightTimer = undefined;
+                    bottomTimer = undefined;
+                    topTimer = undefined;
+                    if (leftTimer === undefined){
                         leftTimer = new Date();
+                    } else if ( nowTime.getTime() - leftTimer.getTime() > 1000) {
+
+                        leftTimer = undefined;
 
 
                         let coordinatesEvent = new CustomEvent('eyeGesture', {
@@ -48,9 +58,14 @@ $(document).ready(function () {
                     }
                 }
                 if(vector_len(landmarks[468].x, landmarks[468].y, landmarks[223].x, landmarks[223].y) <= 0.035){
-                    if (topTimer === undefined || nowTime.getTime() - topTimer.getTime() > 1000) {
-
+                    rightTimer = undefined;
+                    bottomTimer = undefined;
+                    leftTimer = undefined;
+                    if(topTimer === undefined){
                         topTimer = new Date();
+                    } else if ( nowTime.getTime() - topTimer.getTime() > 1000) {
+
+                        topTimer = undefined;
 
 
                         let coordinatesEvent = new CustomEvent('eyeGesture', {
@@ -62,9 +77,14 @@ $(document).ready(function () {
                     }
                 }
                 if(vector_len(landmarks[468].x, landmarks[468].y, landmarks[23].x, landmarks[23].y) <= 0.019){
-                    if (bottomTimer === undefined || nowTime.getTime() - bottomTimer.getTime() > 1000) {
-
+                    rightTimer = undefined;
+                    leftTimer = undefined;
+                    topTimer = undefined;
+                    if (bottomTimer === undefined){
                         bottomTimer = new Date();
+                    } else if ( nowTime.getTime() - bottomTimer.getTime() > 1000) {
+                        bottomTimer = undefined;
+
 
 
                         let coordinatesEvent = new CustomEvent('eyeGesture', {
