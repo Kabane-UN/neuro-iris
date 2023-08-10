@@ -47,10 +47,10 @@ $(document).ready(function() {
         this.topData.sort(compareNumeric);
         this.bottomData.sort(compareNumeric);
         const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
-        rightDist = average(this.rightData.slice(0, Math.floor(this.rightData.length*0.63)));
-        leftDist = average(this.leftData.slice(0, Math.floor(this.leftData.length*0.63)));
-        topDist = average(this.topData.slice(0, Math.floor(this.topData.length*0.63)));
-        bottomDist = average(this.bottomData.slice(0, Math.floor(this.bottomData.length*0.63)));
+        rightDist = average(this.rightData.slice(Math.floor(this.rightData.length*0.1), Math.floor(this.rightData.length*0.9)));
+        leftDist = average(this.leftData.slice(Math.floor(this.leftData.length*0.1), Math.floor(this.leftData.length*0.9)));
+        topDist = average(this.topData.slice(Math.floor(this.topData.length*0.1), Math.floor(this.topData.length*0.9)));
+        bottomDist = average(this.bottomData.slice(Math.floor(this.bottomData.length*0.1), Math.floor(this.bottomData.length*0.9)));
         let a = document.createElement("a");
         a.href = "../?r=" + rightDist + "&l="+leftDist+"&t="+topDist+"&b="+bottomDist;
         a.click();
