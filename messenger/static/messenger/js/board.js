@@ -253,7 +253,6 @@ $(document).ready(function() {
         }
     }
     canvasSelector.on('eyeGesture', function (e) {
-        console.log(e.detail.kind)
         keyboard.changeSelection(e.detail.kind);
 
     });
@@ -263,5 +262,7 @@ $(document).ready(function() {
         keyboard.draw();
         requestAnimationFrame(boardLoop);
     }
-    boardLoop();
+    canvasSelector.on('trackingReady', function () {
+        boardLoop();
+    });
 });

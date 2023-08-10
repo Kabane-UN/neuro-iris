@@ -1,0 +1,15 @@
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.input_video{
+    display: none;
+}
+.output_canvas{
+    display: none;
+}
+#calibrationScreen{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
