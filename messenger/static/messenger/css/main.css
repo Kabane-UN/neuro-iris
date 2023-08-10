@@ -34,3 +34,16 @@
     line-height: 75px;
     color: #000000;
 }
+#calibrationIcon{
+    top: 15px;
+    right: 15px;
+    padding: 5px;
+}
+#calibrationIconBorder{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border:1px solid #000000;
+    border-radius: 50px;
+    box-shadow: 3px 3px 10px #c0c0c0;
+}
