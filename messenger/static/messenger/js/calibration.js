@@ -52,7 +52,10 @@ $(document).ready(function() {
         topDist = average(this.topData.slice(Math.floor(this.topData.length*0.1), Math.floor(this.topData.length*0.9)));
         bottomDist = average(this.bottomData.slice(Math.floor(this.bottomData.length*0.1), Math.floor(this.bottomData.length*0.9)));
         let a = document.createElement("a");
-        a.href = "../?r=" + rightDist + "&l="+leftDist+"&t="+topDist+"&b="+bottomDist;
+        a.href = "../?r=" + rightDist.toFixed(6) +
+            "&l="+leftDist.toFixed(6)+
+            "&t="+topDist.toFixed(6)+
+            "&b="+bottomDist.toFixed(6);
         a.click();
 
     }
@@ -108,7 +111,7 @@ $(document).ready(function() {
             context.fillStyle = "#000000";
             context.fillText('Смотрите вниз', canvas.width*0.5, canvas.height*0.5);
             this.status = 'bottom';
-        } else if (nowTime.getTime() - this.startTime.getTime() > 22000){
+        } else if (nowTime.getTime() - this.startTime.getTime() >= 21000){
             this.status = undefined;
             animation.processing();
         }
@@ -123,5 +126,7 @@ $(document).ready(function() {
         animation.animate()
         requestAnimationFrame(screenLoop);
     }
-    screenLoop();
+    canvasSelector.on('trackingReady', function () {
+        screenLoop();
+    });
 });
