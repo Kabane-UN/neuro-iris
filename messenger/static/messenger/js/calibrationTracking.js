@@ -2,6 +2,7 @@ $(document).ready(function () {
     const videoElement = document.getElementsByClassName('input_video')[0];
     const canvasElement = document.getElementsByClassName('output_canvas')[0];
     const canvasCtx = canvasElement.getContext('2d');
+    let trackingReady = false;
 
     function vector_len(x1, y1, x2, y2){
         return Math.sqrt((x1-x2)**2+(y1-y2)**2)
@@ -13,6 +14,11 @@ $(document).ready(function () {
         canvasCtx.drawImage(
             results.image, 0, 0, canvasElement.width, canvasElement.height);
         if (results.multiFaceLandmarks) {
+            if (!trackingReady){
+                let readyEvent = new CustomEvent('trackingReady');
+                document.getElementById("calibrationScreen").dispatchEvent(readyEvent);
+                trackingReady = true;
+            }
             for (const landmarks of results.multiFaceLandmarks) {
                 let paramEvent = new CustomEvent('eyeParam', {
                     detail: {
