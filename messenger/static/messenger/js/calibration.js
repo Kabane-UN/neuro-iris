@@ -13,6 +13,7 @@ $(document).ready(function() {
         this.leftData = [];
         this.topData = [];
         this.bottomData = [];
+        this.stop = false;
     }
     CalibrationAnimation.prototype.saveData = function (paramsData) {
         if (this.status !== undefined){
@@ -59,12 +60,14 @@ $(document).ready(function() {
         a.click();
 
     }
-    CalibrationAnimation.prototype.animate =  function (){
+    CalibrationAnimation.prototype.animate =  function (nowTime){
         if (this.startTime === undefined){
-            this.startTime = new Date();
+            this.startTime = nowTime;
         }
-        let nowTime = new Date();
-        if (nowTime.getTime() - this.startTime.getTime() < 5000){
+        if (this.stop) {
+            return
+        }
+        if (nowTime - this.startTime < 5000){
             context.font = "bold 44px verdana, sans-serif";
             context.textAlign = "center"
             context.textBaseline = "center";
@@ -73,47 +76,48 @@ $(document).ready(function() {
             context.fillText('Пожалуйста поворачивайте глаза туда куда будет сказано', canvas.width*0.5, canvas.height*0.5);
             context.fillText('Это не займет много времени', canvas.width*0.5, canvas.height*0.60);
 
-        } else if (nowTime.getTime() - this.startTime.getTime() < 6000){
+        } else if (nowTime - this.startTime < 6000){
 
-        } else if (nowTime.getTime() - this.startTime.getTime() < 9000){
+        } else if (nowTime - this.startTime < 9000){
             context.font = "bold 44px verdana, sans-serif";
             context.textAlign = "center"
             context.textBaseline = "center";
             context.fillStyle = "#000000";
             context.fillText('Смотрите вправо', canvas.width*0.5, canvas.height*0.5);
             this.status = 'right';
-        } else if (nowTime.getTime() - this.startTime.getTime() < 10000){
+        } else if (nowTime - this.startTime < 10000){
             this.status = undefined;
         }
-        else if (nowTime.getTime() - this.startTime.getTime() < 13000){
+        else if (nowTime - this.startTime < 13000){
             context.font = "bold 44px verdana, sans-serif";
             context.textAlign = "center"
             context.textBaseline = "center";
             context.fillStyle = "#000000";
             context.fillText('Смотрите влево', canvas.width*0.5, canvas.height*0.5);
             this.status = 'left';
-        } else if (nowTime.getTime() - this.startTime.getTime() < 14000){
+        } else if (nowTime - this.startTime < 14000){
             this.status = undefined;
-        } else if (nowTime.getTime() - this.startTime.getTime() < 17000){
+        } else if (nowTime - this.startTime < 17000){
             context.font = "bold 44px verdana, sans-serif";
             context.textAlign = "center"
             context.textBaseline = "center";
             context.fillStyle = "#000000";
             context.fillText('Смотрите вверх', canvas.width*0.5, canvas.height*0.5);
             this.status = 'top';
-        } else if (nowTime.getTime() - this.startTime.getTime() < 18000){
+        } else if (nowTime - this.startTime < 18000){
             this.status = undefined;
 
-        } else if (nowTime.getTime() - this.startTime.getTime() < 21000){
+        } else if (nowTime - this.startTime < 21000){
             context.font = "bold 44px verdana, sans-serif";
             context.textAlign = "center"
             context.textBaseline = "center";
             context.fillStyle = "#000000";
             context.fillText('Смотрите вниз', canvas.width*0.5, canvas.height*0.5);
             this.status = 'bottom';
-        } else if (nowTime.getTime() - this.startTime.getTime() >= 21000){
+        } else if (nowTime - this.startTime >= 21000){
             this.status = undefined;
             animation.processing();
+            this.stop = true;
         }
     }
     let animation = new CalibrationAnimation();
@@ -121,12 +125,12 @@ $(document).ready(function() {
     canvasSelector.on('eyeParam', function (e) {
         animation.saveData(e.detail);
     });
-    function screenLoop(){
+    function screenLoop(nowTime){
         context.clearRect(0, 0, canvas.width, canvas.height);
-        animation.animate()
+        animation.animate(nowTime)
         requestAnimationFrame(screenLoop);
     }
     canvasSelector.on('trackingReady', function () {
-        screenLoop();
+        requestAnimationFrame(screenLoop);
     });
 });
