@@ -15,11 +15,23 @@
     <script src="{% static 'messenger/js/board.js' %}" type="module"></script>
     <script src="{% static 'messenger/js/printing.js' %}" type="module"></script>
     <script src="{% static 'messenger/js/functionality.js' %}" type="module"></script>
+    <script src="{% static 'messenger/js/visualization.js' %}" type="module"></script>
+    <script src="{% static 'messenger/js/visualizationTable.js' %}" type="module"></script>
 </head>
 <body>
     <div id="calibrationIconBorder">
          <i id="calibrationIcon"  class="fa fa-gear" style="font-size:36px;"></i>
     </div>
+    <div id="coordTable">
+        <table>
+            <tr><th> </th><th>предельные расстояния</th><th>текущие расстояния</th></tr>
+            <tr><td>право</td><td id="rightIdeal">данные</td><td id="rightNow" >данные</td></tr>
+            <tr><td>лево</td><td id="leftIdeal">данные</td><td id="leftNow">данные</td></tr>
+            <tr><td>верх</td><td id="topIdeal">данные</td><td id="topNow">данные</td></tr>
+            <tr><td>низ</td><td id="bottomIdeal">данные</td><td id="bottomNow">данные</td></tr>
+        </table>
+    </div>
+    <canvas id="arrowBoard"></canvas>
     <div class="container">
         <video class="input_video"></video>
         <canvas class="output_canvas" width="1280px" height="720px"></canvas>
