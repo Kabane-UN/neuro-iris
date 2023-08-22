@@ -5,6 +5,24 @@
     display: none;
 }
 
+#arrowBoard{
+    border:3px solid #a9a7a7;
+    border-radius: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    width: 300px;
+    display: block;
+}
+
+#coordTable{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
 #board{
     border:3px solid #a9a7a7;
     border-radius: 20px;
@@ -24,7 +42,7 @@
     padding-right: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 340px;
+    margin-top: 30px;
     display: block;
     height: 75px;
     width:800px;
