@@ -68,8 +68,10 @@ $(document).ready(function() {
                 case 'Space':
                     toPrint = ' ';
                     break;
-                case 'Enter':
-                    toPrint = '\n';
+                case 'Bsp':
+                    toPrint = '';
+                    let delEvent = new CustomEvent('delChar');
+                    document.getElementById("notepad").dispatchEvent(delEvent);
                     break;
                 case 'Shift':
                     toPrint = '';
@@ -161,7 +163,7 @@ $(document).ready(function() {
                 canvas.width*0.075*11, canvas.height*0.2*2, 120,'э',
                 21, 23, 10, 34),
             new Button(
-                canvas.width*0.075*12, canvas.height*0.2*2, 120,'Enter',
+                canvas.width*0.075*12, canvas.height*0.2*2, 120,'Bsp',
                 22, undefined, 11, 35),
 
 
