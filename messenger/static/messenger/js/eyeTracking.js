@@ -40,6 +40,7 @@ $(document).ready(function () {
                     }
                 });
                 document.getElementById("coordTable").dispatchEvent(dataEvent);
+                document.getElementById("arrowBoard").dispatchEvent(dataEvent);
 
                 let nowTime = new Date();
                 if(vector_len(landmarks[468].x, landmarks[468].y, landmarks[33].x, landmarks[33].y) <= rightDist){
@@ -60,12 +61,6 @@ $(document).ready(function () {
                         });
                         document.getElementById("board").dispatchEvent(coordinatesEvent);
                     }
-                    let arrowEvent = new CustomEvent('eyeGesture', {
-                            detail: {
-                                'kind': 'right',
-                            }
-                        });
-                    document.getElementById("arrowBoard").dispatchEvent(arrowEvent);
                 }
                 if(vector_len(landmarks[468].x, landmarks[468].y, landmarks[133].x, landmarks[133].y) <= leftDist){
                     rightTimer = undefined;
@@ -85,12 +80,6 @@ $(document).ready(function () {
                         });
                         document.getElementById("board").dispatchEvent(coordinatesEvent);
                     }
-                    let arrowEvent = new CustomEvent('eyeGesture', {
-                            detail: {
-                                'kind': 'left',
-                            }
-                        });
-                    document.getElementById("arrowBoard").dispatchEvent(arrowEvent);
                 }
                 if(vector_len(landmarks[468].x, landmarks[468].y, landmarks[223].x, landmarks[223].y) <= topDist){
                     rightTimer = undefined;
@@ -110,12 +99,6 @@ $(document).ready(function () {
                         });
                         document.getElementById("board").dispatchEvent(coordinatesEvent);
                     }
-                    let arrowEvent = new CustomEvent('eyeGesture', {
-                            detail: {
-                                'kind': 'top',
-                            }
-                        });
-                    document.getElementById("arrowBoard").dispatchEvent(arrowEvent);
                 }
                 if(vector_len(landmarks[468].x, landmarks[468].y, landmarks[230].x, landmarks[230].y) <= bottomDist){
                     rightTimer = undefined;
@@ -135,23 +118,6 @@ $(document).ready(function () {
                         });
                         document.getElementById("board").dispatchEvent(coordinatesEvent);
                     }
-                    let arrowEvent = new CustomEvent('eyeGesture', {
-                            detail: {
-                                'kind': 'bottom',
-                            }
-                        });
-                    document.getElementById("arrowBoard").dispatchEvent(arrowEvent);
-                }
-                if(vector_len(landmarks[468].x, landmarks[468].y, landmarks[33].x, landmarks[33].y) > rightDist &&
-                vector_len(landmarks[468].x, landmarks[468].y, landmarks[133].x, landmarks[133].y) > leftDist &&
-                vector_len(landmarks[468].x, landmarks[468].y, landmarks[223].x, landmarks[223].y) > topDist &&
-                vector_len(landmarks[468].x, landmarks[468].y, landmarks[230].x, landmarks[230].y) > bottomDist){
-                    let arrowEvent = new CustomEvent('eyeGesture', {
-                            detail: {
-                                'kind': 'center',
-                            }
-                        });
-                    document.getElementById("arrowBoard").dispatchEvent(arrowEvent);
                 }
             }
         }

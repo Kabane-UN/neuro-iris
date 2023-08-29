@@ -5,7 +5,7 @@ $(document).ready(function() {
     canvas.width = canvas.getBoundingClientRect().width;
     canvas.height = canvas.getBoundingClientRect().height;
     function ArrowAnimation (){
-        this.selectedArrow = undefined;
+        this.coordData = undefined;
     }
     ArrowAnimation.prototype.drawArrow = function (selected,
                                                    x1=canvas.width*0.55, y1=canvas.height*0.45,
@@ -33,7 +33,7 @@ $(document).ready(function() {
         context.closePath();
     }
     ArrowAnimation.prototype.animate = function (nowTime){
-        if (this.selectedArrow === 'right') {
+        if (this.coordData.rightNow <= this.coordData.rightIdeal) {
             this.drawArrow(true);
         } else {
             this.drawArrow(false);
@@ -41,7 +41,7 @@ $(document).ready(function() {
         context.translate(canvas.width*0.5, canvas.height*0.5);
         context.rotate(Math.PI/2);
         context.translate(-canvas.width*0.5, -canvas.height*0.5);
-        if (this.selectedArrow === 'bottom') {
+        if (this.coordData.bottomNow <= this.coordData.bottomIdeal) {
             this.drawArrow(true);
         } else {
             this.drawArrow(false);
@@ -49,7 +49,7 @@ $(document).ready(function() {
         context.translate(canvas.width*0.5, canvas.height*0.5);
         context.rotate(Math.PI/2);
         context.translate(-canvas.width*0.5, -canvas.height*0.5);
-        if (this.selectedArrow === 'left') {
+        if (this.coordData.leftNow <= this.coordData.leftIdeal) {
             this.drawArrow(true);
         } else {
             this.drawArrow(false);
@@ -57,7 +57,7 @@ $(document).ready(function() {
         context.translate(canvas.width*0.5, canvas.height*0.5);
         context.rotate(Math.PI/2);
         context.translate(-canvas.width*0.5, -canvas.height*0.5);
-        if (this.selectedArrow === 'top') {
+        if (this.coordData.topNow <= this.coordData.topIdeal) {
             this.drawArrow(true);
         } else {
             this.drawArrow(false);
@@ -66,8 +66,8 @@ $(document).ready(function() {
     }
 
     let animation = new ArrowAnimation();
-    canvasSelector.on('eyeGesture', function (e) {
-        animation.selectedArrow = e.detail.kind;
+    canvasSelector.on('data', function (e) {
+        animation.coordData = e.detail;
 
     });
     function screenLoop(nowTime){
