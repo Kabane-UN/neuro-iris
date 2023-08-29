@@ -22,17 +22,20 @@
     top: 15px;
     left: 15px;
 }
-
-#word{
+#experimentInformationBorder{
+    border:3px solid #a9a7a7;
+    border-radius: 20px;
     position: absolute;
     top: 15px;
-    right: 300px;
+    right: 230px;
+    width: 400px;
+    height: 80px;
+    text-align: center;
+}
+#word{
     font-size: 30px;
 }
 #timer{
-    position: absolute;
-    top: 115px;
-    right: 400px;
     font-size: 30px;
     color: red;
 }
