@@ -78,7 +78,9 @@ $(document).ready(function() {
         a.href = "../?r=" + rightDist.toFixed(6) +
             "&l="+leftDist.toFixed(6)+
             "&t="+topDist.toFixed(6)+
-            "&b="+bottomDist.toFixed(6);
+            "&b="+bottomDist.toFixed(6)+
+            "&margins="+margins+
+            "&word="+word;
         a.click();
 
     }
@@ -106,7 +108,7 @@ $(document).ready(function() {
             context.textBaseline = "center";
             context.fillStyle = "#000000";
             context.fillText('Смотрите вправо', canvas.width*0.5, canvas.height*0.5);
-            this.aimDraw(canvas.width*0.95, canvas.height*0.50, 25, (nowTime - this.startTime - 6000)/3000);
+            this.aimDraw(canvas.width*(1-parseInt(margins, 10)/100), canvas.height*0.50, 25, (nowTime - this.startTime - 6000)/3000);
             this.status = 'right';
         } else if (nowTime - this.startTime < 10000){
             this.status = undefined;
@@ -117,7 +119,7 @@ $(document).ready(function() {
             context.textBaseline = "center";
             context.fillStyle = "#000000";
             context.fillText('Смотрите влево', canvas.width*0.5, canvas.height*0.5);
-            this.aimDraw(canvas.width*0.05, canvas.height*0.50, 25, (nowTime - this.startTime - 10000)/3000);
+            this.aimDraw(canvas.width*(parseInt(margins, 10)/100), canvas.height*0.50, 25, (nowTime - this.startTime - 10000)/3000);
             this.status = 'left';
         } else if (nowTime - this.startTime < 14000){
             this.status = undefined;
@@ -127,7 +129,7 @@ $(document).ready(function() {
             context.textBaseline = "center";
             context.fillStyle = "#000000";
             context.fillText('Смотрите вверх', canvas.width*0.5, canvas.height*0.5);
-            this.aimDraw(canvas.width*0.5, canvas.height*0.05, 25, (nowTime - this.startTime - 14000)/3000);
+            this.aimDraw(canvas.width*0.5, canvas.height*(parseInt(margins, 10)/100), 25, (nowTime - this.startTime - 14000)/3000);
             this.status = 'top';
         } else if (nowTime - this.startTime < 18000){
             this.status = undefined;
@@ -138,7 +140,7 @@ $(document).ready(function() {
             context.textBaseline = "center";
             context.fillStyle = "#000000";
             context.fillText('Смотрите вниз', canvas.width*0.5, canvas.height*0.5);
-            this.aimDraw(canvas.width*0.50, canvas.height*0.95, 25, (nowTime - this.startTime - 18000)/3000);
+            this.aimDraw(canvas.width*0.50, canvas.height*(1-parseInt(margins, 10)/100), 25, (nowTime - this.startTime - 18000)/3000);
             this.status = 'bottom';
         } else if (nowTime - this.startTime >= 21000){
             this.status = undefined;

@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <link rel="stylesheet" href="{% static 'messenger/css/settings.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+     <script src="{% static 'messenger/js/settingsFunctionality.js' %}" type="module"></script>
+</head>
+<body>
+<div id="settingsBlock">
+    <input type="text" id="name" placeholder="Введите свое имя">
+    <br>
+    <input type="text" id="surname" placeholder="Введите свою фамилию">
+    <br>
+    <input type="text" id="patronymic" placeholder="Введите свое отчество">
+    <br>
+    <input type="text" id="age" placeholder="Сколько полных лет">
+    <br>
+    <select id="gender">
+        <option selected>Мужчина</option>
+        <option>Женщина</option>
+    </select>
+    <br>
+    <samp>Отступы прицелов</samp>
+    <select id="margins">
+        <option selected>5</option>
+        <option>10</option>
+        <option>15</option>
+    </select>
+    <samp>%</samp>
+    <br>
+    <samp>Слово</samp>
+    <select id="word">
+        <option selected>мгту</option>
+        <option>бауманка</option>
+        <option>мгту им баумана</option>
+    </select>
+    <br>
+    <button id="subButton">Подтвердить</button>
+</div>
+</body>
+</html>

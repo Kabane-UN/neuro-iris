@@ -22,6 +22,7 @@ $(document).ready(function () {
                 let readyEvent = new CustomEvent('trackingReady');
                 document.getElementById("board").dispatchEvent(readyEvent);
                 document.getElementById("arrowBoard").dispatchEvent(readyEvent);
+                document.getElementById("timer").dispatchEvent(readyEvent);
                 trackingReady = true;
             }
             for (const landmarks of results.multiFaceLandmarks) {

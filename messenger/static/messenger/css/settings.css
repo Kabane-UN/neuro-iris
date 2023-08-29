@@ -1,0 +1,19 @@
+#settingsBlock{
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 300px;
+    text-align: center;
+    display: block;
+    width: 250px;
+    height: 250px;
+    border:3px solid #a9a7a7;
+    border-radius: 20px;
+}
+#name{
+    margin-top: 20px;
+}
+#subButton{
+    margin-top: 30px;
+}

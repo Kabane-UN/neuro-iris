@@ -17,11 +17,14 @@
     <script src="{% static 'messenger/js/functionality.js' %}" type="module"></script>
     <script src="{% static 'messenger/js/visualization.js' %}" type="module"></script>
     <script src="{% static 'messenger/js/visualizationTable.js' %}" type="module"></script>
+    <script src="{% static 'messenger/js/visualizationExperiment.js' %}" type="module"></script>
 </head>
 <body>
     <div id="calibrationIconBorder">
          <i id="calibrationIcon"  class="fa fa-gear" style="font-size:36px;"></i>
     </div>
+    <p id="word"></p>
+    <p id="timer"></p>
     <div id="coordTable">
         <table>
             <tr><th> </th><th>предельные расстояния</th><th>текущие расстояния</th></tr>
@@ -42,7 +45,15 @@
         const rightDist = JSON.parse("{{right | escapejs}}"),
             leftDist = JSON.parse("{{left | escapejs}}"),
             topDist = JSON.parse("{{top | escapejs}}"),
-            bottomDist = JSON.parse("{{bottom | escapejs}}");
+            bottomDist = JSON.parse("{{bottom | escapejs}}"),
+            margins = JSON.parse("{{margins | escapejs}}"),
+            word = JSON.parse("{{word | escapejs}}");
+        const token = "{{csrf_token}}",
+			saveURL = "{% url 'save_data' %}";
+        var timer = 0;
+        $.ajaxSetup({
+			headers: { "X-CSRFToken": token }
+		});
     </script>
 </body>
 </html>
