@@ -267,4 +267,5 @@ $(document).ready(function() {
     canvasSelector.on('trackingReady', function () {
         boardLoop();
     });
+
 });

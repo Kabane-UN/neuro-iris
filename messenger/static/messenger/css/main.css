@@ -23,6 +23,20 @@
     left: 15px;
 }
 
+#word{
+    position: absolute;
+    top: 15px;
+    right: 300px;
+    font-size: 30px;
+}
+#timer{
+    position: absolute;
+    top: 115px;
+    right: 400px;
+    font-size: 30px;
+    color: red;
+}
+
 #board{
     border:3px solid #a9a7a7;
     border-radius: 20px;

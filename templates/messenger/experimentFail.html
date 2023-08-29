@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'messenger/css/endScreen.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'messenger/js/endScreen.js' %}" type="module"></script>
+</head>
+<body>
+<div id="message">
+    <p>В данных эксперимента ошибка, они не сохранены</p>
+    <p>Благодарим за участие, попробуйте еще раз</p>
+    <button id="toStartButton">Вернуться в начало</button>
+</div>
+</body>
+</html>
